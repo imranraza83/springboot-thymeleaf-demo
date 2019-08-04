@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../favicon.ico" />
+
+<title>Navbar Template for Bootstrap</title>
+
+<!-- Bootstrap core CSS -->
+<link href="../static/css/bootstrap.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.css}" />
+<!-- Bootstrap Date-Picker Plugin -->
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script th:href="@{/js/bootstrap.js}"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+<script>
+	$(document).ready(
+			function() {
+				var date_input = $('input[name="startDate"]'); //our date input has the name "date"
+				var container = $('.bootstrap-iso form').length > 0 ? $(
+						'.bootstrap-iso form').parent() : "body";
+				var options = {
+					format : 'dd/mm/yyyy',
+					container : container,
+					todayHighlight : true,
+					autoclose : true,
+				};
+				date_input.datepicker(options);
+			})
+</script>
+<script>
+	$(document).ready(
+			function() {
+				var date_input = $('input[name="endDate"]'); //our date input has the name "date"
+				var container = $('.bootstrap-iso form').length > 0 ? $(
+						'.bootstrap-iso form').parent() : "body";
+				var options = {
+					format : 'dd/mm/yyyy',
+					container : container,
+					todayHighlight : true,
+					autoclose : true,
+				};
+				date_input.datepicker(options);
+			})
+</script>
+</head>
+<body>
+	<div class="container">
+
+		<!-- Main component for a primary marketing message or call to action -->
+		<div class="jumbotron">
+			<form action="#" th:action="@{/compareDates}" th:object="${event}" method="post">
+				<div class="form-group">
+					<!-- Date input -->
+					<label class="control-label" for="startdate">Start Date</label> <input
+						class="form-control" id="startDate" name="startDate" placeholder="MM/DD/YYY"
+						type="text" th:field="*{startDate}"/>
+				</div>
+				<div class="form-group">
+					<!-- Date input -->
+					<label class="control-label" for="enddate">End Date</label> <input
+						class="form-control" id="endDate" name="endDate" placeholder="MM/DD/YYY"
+						type="text" th:field="*{endDate}"/>
+				</div>
+				<div>
+					<span class="error invalid-feedback" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></span>
+					<span class="error invalid-feedback" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></span>
+				</div>
+				<div class="form-group">
+					<!-- Submit button -->
+					<button class="btn btn-primary " name="submit" type="submit">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- /container -->
+
+</body>
+</html>
